@@ -1,5 +1,9 @@
 extends Node2D
 
+var lives = 3
+
+@onready var player = $Player
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -13,3 +17,11 @@ func _process(delta: float) -> void:
 
 func _on_deathzone_area_entered(area: Area2D) -> void:
 	area.die()
+
+
+func _on_player_took_damage() -> void:
+	lives -= 1
+	if lives == 0:
+		print("game over")
+		player.die()
+		

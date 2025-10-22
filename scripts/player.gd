@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+signal took_damage
 
 const SPEED = 300.0
 
@@ -35,3 +36,10 @@ func fire() -> void:
 	rocket_container.add_child(rocket_instance)
 	rocket_instance.global_position = global_position
 	rocket_instance.global_position.x += 70
+
+func take_damage() -> void:
+	emit_signal("took_damage")
+	
+
+func die() -> void:
+	queue_free()
