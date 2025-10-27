@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dxq28asucbiil"]
+[gd_scene load_steps=10 format=3 uid="uid://dxq28asucbiil"]
 
 [ext_resource type="Script" uid="uid://cy6tlaaxdkli" path="res://scripts/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://jqq0fkswhg0w" path="res://assets/textures/player_ship.png" id="2_i3pqv"]
@@ -7,6 +7,33 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hqtel"]
 radius = 28.0
 height = 106.0
+
+[sub_resource type="Gradient" id="Gradient_qhqgy"]
+offsets = PackedFloat32Array(0, 0.49435028, 0.9858757)
+colors = PackedColorArray(1, 1, 0, 0.1882353, 1, 0.120000005, 0.120000005, 1, 1, 0.120000005, 0.120000005, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dqkch"]
+gradient = SubResource("Gradient_qhqgy")
+
+[sub_resource type="Curve" id="Curve_qlg0r"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.6447369, 0.6016343), 0.0, 0.0, 0, 0, Vector2(1, 0.030643582), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_tuyoq"]
+curve = SubResource("Curve_qlg0r")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fjrip"]
+lifetime_randomness = 0.4
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 6.0
+spread = 28.0
+initial_velocity_min = -200.0
+gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 8.0
+scale_curve = SubResource("CurveTexture_tuyoq")
+color_ramp = SubResource("GradientTexture1D_dqkch")
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 6
@@ -24,3 +51,17 @@ shape = SubResource("CapsuleShape2D_hqtel")
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_qhqgy")
+
+[node name="FlameParticleEffect" type="GPUParticles2D" parent="."]
+z_index = -2
+position = Vector2(-20, 21)
+amount = 100
+lifetime = 0.3
+process_material = SubResource("ParticleProcessMaterial_fjrip")
+
+[node name="FlameParticleEffect2" type="GPUParticles2D" parent="."]
+z_index = -2
+position = Vector2(-20, -19)
+amount = 100
+lifetime = 0.3
+process_material = SubResource("ParticleProcessMaterial_fjrip")
