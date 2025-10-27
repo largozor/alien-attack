@@ -34,4 +34,9 @@ gizmo_extents = 37.5
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
+[node name="PathTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="PathTimer" to="." method="_on_path_timer_timeout"]
