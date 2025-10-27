@@ -6,6 +6,9 @@ const SPEED = 300.0
 
 var rocketscene = preload("res://scenes/rocket.tscn")
 @onready var rocket_container = get_node("RocketContainer")
+@onready var shoot_sound = $ShootSound
+
+
 
 
 
@@ -36,6 +39,7 @@ func fire() -> void:
 	rocket_container.add_child(rocket_instance)
 	rocket_instance.global_position = global_position
 	rocket_instance.global_position.x += 70
+	shoot_sound.play()
 
 func take_damage() -> void:
 	emit_signal("took_damage")
