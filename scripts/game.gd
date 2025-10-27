@@ -26,10 +26,10 @@ func _on_deathzone_area_entered(area: Area2D) -> void:
 func _on_player_took_damage() -> void:
 	lives -= 1
 	hud.set_lives_label(lives)
+	explode_sound.play()
 	if lives == 0:
 		print("game over")
 		player.die()
-		explode_sound.play()
 		
 		await get_tree().create_timer(1.5).timeout
 		
