@@ -7,10 +7,16 @@ var enemy_scene = preload("res://scenes/enemy.tscn")
 var path_enemy_scene = preload("res://scenes/path_enemy.tscn")
 
 @onready var spawn_positions = $SpawnPositions
+@onready var timer = $Timer
+@onready var path_timer = $PathTimer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
+
+func increase_spawn_rate(interval: float) -> void:
+	timer.wait_time *= (1.0 - interval)
+	path_timer.wait_time *= (1.0 - interval)
 
 
 func _on_timer_timeout() -> void:
