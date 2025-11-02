@@ -46,7 +46,7 @@ func _on_enemy_spawner_enemy_spawned(enemy_instance: Variant) -> void:
 func _on_enemy_died() -> void:
 	score += 100
 	enemy_hit_sound.play()
-	spawner.increase_spawn_rate(0.05)
+	spawner.increase_spawn_rate(0.02)
 	#print ("Score: " + str(score))
 	hud.set_score_label(score)
 
